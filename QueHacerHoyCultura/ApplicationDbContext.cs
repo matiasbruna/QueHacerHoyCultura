@@ -9,5 +9,12 @@ namespace QueHacerHoyCultura
         {
         }
         public DbSet<Provincia> Provincias => Set<Provincia>();
+        public DbSet<TipoUsuario> TipoUsuarios => Set<TipoUsuario>();
+
+        public DbSet<Localidad> Localidades => Set<Localidad>();
+
+        public DbSet   <Usuario> Usuarios => Set<Usuario>();
+
+
     }
 }
