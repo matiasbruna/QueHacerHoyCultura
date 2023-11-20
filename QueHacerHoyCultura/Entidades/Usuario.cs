@@ -6,8 +6,12 @@
         public string Nombre { get; set; } = null!;
         public string Email { get; set; } = null!;
 
-        public int Localidad { get; set; }
+        public int LocalidadId{ get; set; }
 
-        public int IdTipoUsuario { get; set; }
+        public Localidad Localidad { get; set; } = null!;
+
+        public int TipoUsuarioId { get; set; }
+
+        public TipoUsuario TipoUsuario { get; set; } = null!;
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QueHacerHoyCultura;
 
@@ -10,9 +11,11 @@ using QueHacerHoyCultura;
 namespace QueHacerHoyCultura.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231120154258_RelacionProvonciaLocalidad")]
+    partial class RelacionProvonciaLocalidad
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,21 +92,17 @@ namespace QueHacerHoyCultura.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LocalidadId")
+                    b.Property<int>("IdTipoUsuario")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Localidad")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TipoUsuarioId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("LocalidadId");
-
-                    b.HasIndex("TipoUsuarioId");
 
                     b.ToTable("Usuarios");
                 });
@@ -119,38 +118,9 @@ namespace QueHacerHoyCultura.Migrations
                     b.Navigation("Provincia");
                 });
 
-            modelBuilder.Entity("QueHacerHoyCultura.Entidades.Usuario", b =>
-                {
-                    b.HasOne("QueHacerHoyCultura.Entidades.Localidad", "Localidad")
-                        .WithMany("Usuario")
-                        .HasForeignKey("LocalidadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QueHacerHoyCultura.Entidades.TipoUsuario", "TipoUsuario")
-                        .WithMany("Usuario")
-                        .HasForeignKey("TipoUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Localidad");
-
-                    b.Navigation("TipoUsuario");
-                });
-
-            modelBuilder.Entity("QueHacerHoyCultura.Entidades.Localidad", b =>
-                {
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("QueHacerHoyCultura.Entidades.Provincia", b =>
                 {
                     b.Navigation("Localidad");
-                });
-
-            modelBuilder.Entity("QueHacerHoyCultura.Entidades.TipoUsuario", b =>
-                {
-                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }
