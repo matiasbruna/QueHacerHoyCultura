@@ -1,22 +1,19 @@
-﻿@model IEnumerable<QueHacerHoyCultura.Entidades.Localidad>
+﻿@model IEnumerable<QueHacerHoyCultura.Entidades.TipoEvento>
 
 @{
-    ViewData["Title"] = "Localidad";
+    ViewData["Title"] = "Tipos Eventos";
 }
 
-<h1>Listado Localidades</h1>
+<h1>Lista de Tipos de Eventos</h1>
 
 <p>
-    <a asp-action="Create">Crear Nueva</a>
+    <a asp-action="Create">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Provincia)
             </th>
             <th></th>
         </tr>
@@ -26,9 +23,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Provincia.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

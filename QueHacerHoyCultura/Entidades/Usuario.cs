@@ -22,5 +22,6 @@ namespace QueHacerHoyCultura.Entidades
         public int TipoUsuarioId { get; set; }
         [ForeignKey("TipoUsuarioId")]
         public TipoUsuario? TipoUsuario { get; set; } = null!;
+
     }
 }

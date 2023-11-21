@@ -16,5 +16,7 @@ namespace QueHacerHoyCultura.Entidades
         public Provincia? Provincia { get; set; } = null!;
 
         public List<Usuario> Usuario { get; set; } =  new List<Usuario>();
+
+        public List<Eventos> Eventos { get; set; } = new List<Eventos>();
     }
 }

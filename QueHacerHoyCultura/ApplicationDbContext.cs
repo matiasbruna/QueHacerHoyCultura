@@ -15,6 +15,10 @@ namespace QueHacerHoyCultura
 
         public DbSet   <Usuario> Usuarios => Set<Usuario>();
 
+        public DbSet<Eventos> Eventos => Set<Eventos>();
+
+        public DbSet<TipoEvento> TipoEventos => Set<TipoEvento>();
+
 
     }
 }
