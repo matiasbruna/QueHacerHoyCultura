@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QueHacerHoyCultura.Migrations
 {
     /// <inheritdoc />
-    public partial class PrimeraMigracion : Migration
+    public partial class AddEventosImegenes : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,9 +80,7 @@ namespace QueHacerHoyCultura.Migrations
                     Lugar = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FechaEvento = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Imagen = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    NombreArchivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TipoMIME = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagenEvento = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LocalidadId = table.Column<int>(type: "int", nullable: false),
                     TipoEventoId = table.Column<int>(type: "int", nullable: false)
                 },

@@ -25,13 +25,7 @@
                 @Html.DisplayNameFor(model => model.FechaEvento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Imagen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreArchivo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoMIME)
+                @Html.DisplayNameFor(model => model.ImagenEvento)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Localidad)
@@ -58,19 +52,13 @@
                 @Html.DisplayFor(modelItem => item.FechaEvento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Imagen)
+                @Html.DisplayFor(modelItem => item.ImagenEvento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NombreArchivo)
+                @Html.DisplayFor(modelItem => item.Localidad.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoMIME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Localidad.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoEvento.Id)
+                @Html.DisplayFor(modelItem => item.TipoEvento.Nombre)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

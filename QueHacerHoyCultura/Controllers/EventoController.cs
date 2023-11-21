@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using QueHacerHoyCultura;
 using QueHacerHoyCultura.Entidades;
+using QueHacerHoyCultura.ViewModels;
 
 namespace QueHacerHoyCultura.Controllers
 {
     public class EventoController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public EventoController(ApplicationDbContext context)
+        public EventoController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // GET: Evento
@@ -59,17 +62,46 @@ namespace QueHacerHoyCultura.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NombreEvento,Lugar,Direccion,FechaEvento,Imagen,NombreArchivo,TipoMIME,LocalidadId,TipoEventoId")] Eventos eventos)
+        public async Task<IActionResult> Create(EventoViewModels model)
         {
+            string uniqueFileName = UploadedFile(model);
             if (ModelState.IsValid)
             {
-                _context.Add(eventos);
+                Eventos evento = new Eventos()
+                {
+                    ImagenEvento = uniqueFileName,
+                    NombreEvento = model.NombreEvento,
+                    Lugar = model.Lugar,
+                    Direccion = model.Direccion,
+                    FechaEvento = model.FechaEvento,
+                    LocalidadId = model.LocalidadId,
+                    TipoEventoId = model.TipoEventoId
+
+                };
+                _context.Add(evento);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id", eventos.LocalidadId);
-            ViewData["TipoEventoId"] = new SelectList(_context.TipoEventos, "Id", "Id", eventos.TipoEventoId);
-            return View(eventos);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Id", "Id", model.LocalidadId);
+            ViewData["TipoEventoId"] = new SelectList(_context.TipoEventos, "Id", "Id", model.TipoEventoId);
+            return View(model);
+        }
+
+        private string UploadedFile(EventoViewModels model)
+        {
+            string uniqueFileName = null;
+
+            if (model.Imagen != null)
+            {
+                string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Imagen.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.Imagen.CopyTo(fileStream);
+                }
+            }
+            return uniqueFileName;
         }
 
         // GET: Evento/Edit/5
@@ -95,7 +127,7 @@ namespace QueHacerHoyCultura.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreEvento,Lugar,Direccion,FechaEvento,Imagen,NombreArchivo,TipoMIME,LocalidadId,TipoEventoId")] Eventos eventos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NombreEvento,Lugar,Direccion,FechaEvento,ImagenEvento,LocalidadId,TipoEventoId")] Eventos eventos)
         {
             if (id != eventos.Id)
             {

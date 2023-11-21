@@ -38,18 +38,13 @@ namespace QueHacerHoyCultura.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.Property<byte[]>("Imagen")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("ImagenEvento")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LocalidadId")
                         .HasColumnType("int");
 
                     b.Property<string>("Lugar")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreArchivo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -59,10 +54,6 @@ namespace QueHacerHoyCultura.Migrations
 
                     b.Property<int>("TipoEventoId")
                         .HasColumnType("int");
-
-                    b.Property<string>("TipoMIME")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
